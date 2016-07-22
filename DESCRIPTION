@@ -1,0 +1,14 @@
+Package: sfsr
+Title: Utilities for Manipulating Allele Frequency Spectra
+Version: 0.0.0.9000
+Authors@R: person("Andrew", "Morgan", email = "andrew.parker.morgan@gmail.com", role = c("aut", "cre"))
+Description: Simple utilities for working with allele frequency spectra (aka
+    "site frequency spectra", SFS) for population genetics.
+Depends:
+    R (>= 3.0.0)
+Imports:
+    stringr (>= 1.0.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.0
