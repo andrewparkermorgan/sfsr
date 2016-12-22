@@ -377,10 +377,11 @@ d_xy <- function(sfs, persite = FALSE, ...) {
 	
 	.dxy.1d <- function(x) sum((seq_along(x)-1)*x)/(length(x)-1)
 	.dxy <- function(x) {
+		denom <- if (!persite) 1 else sum(x)
 		if (ndim_sfs(x) > 1)
 			.pairwise.div(x, persite = persite)
 		else
-			.dxy.1d(x)/sum(x)
+			.dxy.1d(x)/denom
 	}
 	
 	sfs <- matrify(sfs)
@@ -757,6 +758,7 @@ e1 <- function(n) c1(n)/a1(n)
 e2 <- function(n) c2(n)/(a1(n)^2+a2(n))
 
 C <- function(n) if (n == 2) 1 else 2*( ((n*a1(n))-2*(n-1))/((n-1)*(n-2)) )
+.tajima.denom <- function(n,S) sqrt(e1(n)*S + e2(n)*S*(S-1))
 
 #' Calculate Tajima's D
 #' 
@@ -777,8 +779,7 @@ tajimaD <- function(x, ...){
 	pw <- theta_pi(x, persite = FALSE)
 	S <- .segsites(x)
 	numerator <- pw - S/a1(n)
-	denominator <- sqrt(e1(n)*S + e2(n)*S*(S-1))
-	return(numerator/denominator)
+	return(numerator/.tajima.denom(n,S))
 	
 }
 
